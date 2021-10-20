@@ -22,33 +22,32 @@ def synch_name(client):
 def get_msg_server():
     while(True):
         print(client.recv(2048).decode("utf8"))
-    
-#get server ip!
-server = str(input("server  :"))
-port = int(input("port  :"))
-client = client(socket.AF_INET,socket.SOCK_STREAM,"")
-com=False
-'''programme principal'''
-try : 
-    client.connect((server,port))
-    print("client connected !")
-    print("-----------------------------------------------------------")
-    synch_name(client)
-    get_msg_thread=threading.Thread(target=get_msg_server)
-    get_msg_thread.start()
-    com=True
-    
-except Exception as e :
-    print("can't connect to server !")
-    client.close()
-if(com):
-    try:
-        while(True):
-                msg = client.get_msg()
-                client.send_msg(msg)
-                if(msg == "!Disconnect"):
-                    break
+if __name__ == "__main__":    
+    #get server ip!
+    server = str(input("server  :"))
+    port = int(input("port  :"))
+    client = client(socket.AF_INET,socket.SOCK_STREAM,"")
+    com=False
+    try : 
+        client.connect((server,port))
+        print("client connected !")
+        print("-----------------------------------------------------------")
+        synch_name(client)
+        get_msg_thread=threading.Thread(target=get_msg_server)
+        get_msg_thread.start()
+        com=True
+
     except Exception as e :
-        print("connexion lost !")
-    finally :
+        print("can't connect to server !")
         client.close()
+    if(com):
+        try:
+            while(True):
+                    msg = client.get_msg()
+                    client.send_msg(msg)
+                    if(msg == "!Disconnect"):
+                        break
+        except Exception as e :
+            print("connexion lost !")
+        finally :
+            client.close()
