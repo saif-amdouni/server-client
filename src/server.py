@@ -43,9 +43,9 @@ def start_server(server):
         print(f"Clients = {server.clients.keys()}")
 
 
-
-host , port =('',5566)
-server = server(socket.AF_INET,socket.SOCK_STREAM)
-server.bind((host,port))
-print("le serveur est demarré")
-start_server(server)
+if __name__ == "__main__":
+    host , port =('',5566)
+    server = server(socket.AF_INET,socket.SOCK_STREAM)
+    server.bind((host,port))
+    print("le serveur est demarré")
+    start_server(server)
