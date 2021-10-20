@@ -1,7 +1,7 @@
 <!-- GETTING STARTED -->
 ## Getting Started
 
-this is a basic implementation of a server-client messaging application.
+This is a basic implementation of a server-client messaging application.
 This is not a scalable approach and should only be used for educational purposes.
 
 ### Prerequisites
